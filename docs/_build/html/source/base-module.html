@@ -1,0 +1,404 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>基站模块 &mdash; LPWDS 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="数据收发" href="base-data-module.html" />
+    <link rel="prev" title="节点模块" href="node-module.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> LPWDS
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="node-module.html">节点模块</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">基站模块</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">1. 基站模块的主要功能：</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">2. 基站模块的配置项</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">3. 基站模块配置简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">4. 基站模块配置详解</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="base-data-module.html">数据收发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ap-module.html">接入点模块</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ap-auth-module.html">鉴权</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ap-hs-module.html">高速传输</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">LPWDS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>基站模块</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/source/base-module.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>基站模块<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="id2">
+<h2>1. 基站模块的主要功能：<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>建立和维护低功耗连接</li>
+<li>为节点分配跳频表</li>
+<li>为节点分配时隙</li>
+</ol>
+<p>基站模块是整个LPWDS网络中的核心设施。基站模块和LPWDS服务程序使用串口进行通信。
+同时基站模块的配置也是通过LPWDS服务程序来来进行配置的。
+LPWDS服务程序使用REDIS数据库作为其对外接口。任何对LPWDS的配置，包含LPWDS的服务程序，LPWDS基站，
+LPWDS接入点和LPWDS节点均使用通过操作REDIS数据库来实现的。
+REDIS数据库的使用方法见：<a class="reference external" href="https://www.runoob.com/redis/redis-tutorial.html">https://www.runoob.com/redis/redis-tutorial.html</a></p>
+</div>
+<div class="section" id="id3">
+<h2>2. 基站模块的配置项<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="code c highlight-default notranslate"><div class="highlight"><pre><span></span>#define CELL_MAC_PROFILE_BASE_SET_SAVE          0x90
+#define CELL_MAC_PROFILE_BASE_SET_PANID         0x91
+#define CELL_MAC_PROFILE_BASE_SET_KEY           0x92
+//start 以下设置指令不建议用户直接使用。如有需求请联系厂商
+#define CELL_MAC_PROFILE_BASE_SET_SLOT1         0x93
+#define CELL_MAC_PROFILE_BASE_SET_SLOT2         0x94
+#define CELL_MAC_PROFILE_BASE_SET_MAC           0x95
+#define CELL_MAC_PROFILE_BASE_SET_POLL          0x96
+//end
+#define CELL_MAC_PROFILE_BASE_GET_TICK          0x97
+#define CELL_MAC_PROFILE_BASE_SET_BEACON        0x98
+#define CELL_MAC_PROFILE_BASE_GET_PANID         0x99
+#define CELL_MAC_PROFILE_BASE_GET_HW            0x9A
+#define CELL_MAC_PROFILE_BASE_GET_SW            0x9B
+#define CELL_MAC_PROFILE_BASE_GET_KEY           0x9C
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>3. 基站模块配置简介<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>基站模块的配置是通过REDIS数据库的pubsub来实现的。</p>
+<p>具体使用方法如下:</p>
+<ol class="arabic simple">
+<li>配置基站块的指令下发：使用publish指令，topic：pipe.base.command</li>
+<li>基站模块的的消息返回：订阅REDIS的pipe.base.message来获取基站模块的返回消息</li>
+</ol>
+</div>
+<div class="section" id="id5">
+<h2>4. 基站模块配置详解<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>以下实例均以‘C23380B93456’基站模块为例</div></blockquote>
+<ol class="arabic simple">
+<li>重启指令 0x82</li>
+</ol>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">publish</span> <span class="n">pipe</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">command</span> <span class="n">C23380B93456820000</span>
+
+<span class="c1">#该消息没有返回</span>
+<span class="c1">#指令末尾的0000 补偿长度使用无实际意义</span>
+</pre></div>
+</div>
+<ol class="arabic" start="2">
+<li><p class="first">配置保存执行 0x90</p>
+<p>任何对基站模块的修改均不是立即生效的，其生效过程： 修改配置-&gt;保存配置-&gt;重启。 3个过程依次完成方可生效。</p>
+</li>
+</ol>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">publish</span> <span class="n">pipe</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">command</span> <span class="n">C23380B93456900000</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>获取PANID 0x99</li>
+</ol>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">publish</span> <span class="n">pipe</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">command</span> <span class="n">C23380B93456990000</span>
+
+<span class="c1">#redis-cli 订阅pipe.base.message返回：</span>
+<span class="mi">1</span><span class="p">)</span> <span class="s2">&quot;pmessage&quot;</span>
+<span class="mi">2</span><span class="p">)</span> <span class="s2">&quot;*&quot;</span>
+<span class="mi">3</span><span class="p">)</span> <span class="s2">&quot;pipe.base.message&quot;</span>
+<span class="mi">4</span><span class="p">)</span> <span class="s2">&quot;99C23380B9345600123600F00040000891DF&quot;</span>
+
+<span class="c1">#99C23380B9345600123600F00040000891DF 基站返回消息内容</span>
+<span class="c1">#99 消息指令</span>
+<span class="c1">#  C23380B93456 基站模块的mac地址</span>
+<span class="c1">#              00 消息返回结果： 00 代表OK，01代表ERROR</span>
+<span class="c1">#                1236 基站模块的PANID</span>
+<span class="c1">#                    00F0 基站模块的DS</span>
+<span class="c1">#                        0040 基站模块的RS</span>
+<span class="c1">#                             预留参数</span>
+<span class="c1">#</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>设置PANID 0x91</li>
+</ol>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">publish</span> <span class="n">pipe</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">command</span> <span class="n">C23380B93456910248</span>
+<span class="p">(</span><span class="n">integer</span><span class="p">)</span> <span class="mi">2</span>
+
+<span class="c1">#redis-cli 订阅pipe.base.message返回：</span>
+<span class="mi">1</span><span class="p">)</span> <span class="s2">&quot;pmessage&quot;</span>
+<span class="mi">2</span><span class="p">)</span> <span class="s2">&quot;*&quot;</span>
+<span class="mi">3</span><span class="p">)</span> <span class="s2">&quot;pipe.base.message&quot;</span>
+<span class="mi">4</span><span class="p">)</span> <span class="s2">&quot;91C23380B9345600DC48&quot;</span>
+
+<span class="c1">#91C23380B9345600DC48 基站返回消息内容</span>
+<span class="c1">#91 消息指令</span>
+<span class="c1">#  C23380B93456 基站模块的mac地址</span>
+<span class="c1">#              00 消息返回结果： 00 代表OK，01代表ERROR</span>
+<span class="c1">#</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li>设置KEY 0x92</li>
+</ol>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">publish</span> <span class="n">pipe</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">command</span> <span class="n">C23380B9345692000102030405060708090A0B0C0D0E0F</span>
+<span class="p">(</span><span class="n">integer</span><span class="p">)</span> <span class="mi">2</span>
+
+<span class="c1">#redis-cli 订阅pipe.base.message返回：</span>
+<span class="mi">1</span><span class="p">)</span> <span class="s2">&quot;pmessage&quot;</span>
+<span class="mi">2</span><span class="p">)</span> <span class="s2">&quot;*&quot;</span>
+<span class="mi">3</span><span class="p">)</span> <span class="s2">&quot;pipe.base.message&quot;</span>
+<span class="mi">4</span><span class="p">)</span> <span class="s2">&quot;92C23380B9345600143D&quot;</span>
+
+<span class="c1">#92C23380B9345600DC48 基站返回消息内容</span>
+<span class="c1">#92 消息指令</span>
+<span class="c1">#  C23380B93456 基站模块的mac地址</span>
+<span class="c1">#              00 消息返回结果： 00 代表OK，01代表ERROR</span>
+<span class="c1">#</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="6">
+<li>获取硬件版本 0x9A</li>
+</ol>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">publish</span> <span class="n">pipe</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">command</span> <span class="n">C23380B934569A0000</span>
+<span class="p">(</span><span class="n">integer</span><span class="p">)</span> <span class="mi">2</span>
+
+<span class="c1">#redis-cli 订阅pipe.base.message返回：</span>
+<span class="mi">1</span><span class="p">)</span> <span class="s2">&quot;pmessage&quot;</span>
+<span class="mi">2</span><span class="p">)</span> <span class="s2">&quot;*&quot;</span>
+<span class="mi">3</span><span class="p">)</span> <span class="s2">&quot;pipe.base.message&quot;</span>
+<span class="mi">4</span><span class="p">)</span> <span class="s2">&quot;9AC23380B93456004B4C4D5F4E524635323833325F56312C28&quot;</span>
+
+<span class="c1">#9AC23380B93456004B4C4D5F4E524635323833325F56312C28 基站返回消息内容</span>
+<span class="c1">#9A 消息指令</span>
+<span class="c1">#  C23380B93456 基站模块的mac地址</span>
+<span class="c1">#              00 消息返回结果： 00 代表OK，01代表ERROR</span>
+<span class="c1">#                4B4C4D5F4E524635323833325F5631 &gt;&gt; KLM_NRF52832_V1</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="7">
+<li>获取固件版本 0x9B</li>
+</ol>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">publish</span> <span class="n">pipe</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">command</span> <span class="n">C23380B934569B0000</span>
+<span class="p">(</span><span class="n">integer</span><span class="p">)</span> <span class="mi">2</span>
+
+<span class="c1">#redis-cli 订阅pipe.base.message返回：</span>
+<span class="mi">1</span><span class="p">)</span> <span class="s2">&quot;pmessage&quot;</span>
+<span class="mi">2</span><span class="p">)</span> <span class="s2">&quot;*&quot;</span>
+<span class="mi">3</span><span class="p">)</span> <span class="s2">&quot;pipe.base.message&quot;</span>
+<span class="mi">4</span><span class="p">)</span> <span class="s2">&quot;9BC23380B934560076302E352E354E8D1E&quot;</span>
+
+<span class="c1">#9BC23380B934560076302E352E354E8D1E 基站返回消息内容</span>
+<span class="c1">#9B 消息指令</span>
+<span class="c1">#  C23380B93456 基站模块的mac地址</span>
+<span class="c1">#              00 消息返回结果： 00 代表OK，01代表ERROR</span>
+<span class="c1">#                76302E352E354E &gt;&gt; v0.5.5N</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="8">
+<li>获取KEY 0x9C</li>
+</ol>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">publish</span> <span class="n">pipe</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">command</span> <span class="n">A3399DCD5CE89C0000</span>
+<span class="p">(</span><span class="n">integer</span><span class="p">)</span> <span class="mi">2</span>
+
+<span class="c1">#redis-cli 订阅pipe.base.message返回：</span>
+<span class="mi">1</span><span class="p">)</span> <span class="s2">&quot;pmessage&quot;</span>
+<span class="mi">2</span><span class="p">)</span> <span class="s2">&quot;*&quot;</span>
+<span class="mi">3</span><span class="p">)</span> <span class="s2">&quot;pipe.base.message&quot;</span>
+<span class="mi">4</span><span class="p">)</span> <span class="s2">&quot;9CA3399DCD5CE800000102030405060708090A0B0C0D0E0F00340B&quot;</span>
+
+<span class="c1">#9CA3399DCD5CE800000102030405060708090A0B0C0D0E0F00340B 基站返回消息内容</span>
+<span class="c1">#9C 消息指令</span>
+<span class="c1">#  A3399DCD5CE8 基站模块的mac地址</span>
+<span class="c1">#              00 消息返回结果： 00 代表OK，01代表ERROR</span>
+<span class="c1">#                000102030405060708090A0B0C0D0E0F 基站模块密钥</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="base-data-module.html" class="btn btn-neutral float-right" title="数据收发" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="node-module.html" class="btn btn-neutral float-left" title="节点模块" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Larry.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

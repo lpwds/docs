@@ -1,0 +1,452 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>节点模块 &mdash; LPWDS 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="基站模块" href="base-module.html" />
+    <link rel="prev" title="Welcome to LPWDS’s documentation!" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> LPWDS
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">节点模块</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">1. 节点模块简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sdk">2. SDK开发文档</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="base-module.html">基站模块</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base-data-module.html">数据收发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ap-module.html">接入点模块</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ap-auth-module.html">鉴权</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ap-hs-module.html">高速传输</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">LPWDS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>节点模块</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/source/node-module.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>节点模块<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="id2">
+<h2>1. 节点模块简介<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>节点模块和基站模块、接入点模块不同的是：节点模块提供SDK用户可使用SDK进行SOC开发。
+基站模块和接入点模块则是由厂家提供的标准品，不可进行定制开发。</p>
+<p>节点模块可以使用厂家提供的协议栈和SDK进行SOC开发。
+具体实现方式：</p>
+<ol class="arabic simple">
+<li><dl class="first docutils">
+<dt>协议栈烧录</dt>
+<dd><ol class="first last arabic">
+<li>协议栈的烧录必须使用厂家提供的协议栈烧录工具进行烧录。</li>
+<li>烧录完协议栈之后方可进行SOC开发</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li>SDK 有厂家提供用于SOC开发</li>
+</ol>
+</div>
+<div class="section" id="sdk">
+<h2>2. SDK开发文档<a class="headerlink" href="#sdk" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>配置项</li>
+</ol>
+<div class="code c highlight-default notranslate"><div class="highlight"><pre><span></span>struct case_config_t
+{
+    uint8_t  addr[6];    //节点模块的MAC地址
+    uint16_t panid;     //节点需要连接的网络的PANID，如果设置成0xffff，则有节点模块通过接入点自动获取
+    uint16_t extid;     //预留
+
+    uint32_t poll_interval;     //内部参数
+    uint32_t max_lose_cnt;      //内部参数
+    uint32_t scan_interval;     //内部参数
+
+    uint8_t key[16];    //节点需要连接的网络的KEY，节点模块可以通过接入点自动获取
+
+    uint8_t  key2[16];       //用于鉴权的KEY
+    uint8_t  iv2[16];        //用于鉴权的IV
+    uint32_t token;         //用于鉴权的TOKEN
+    uint32_t adv_mode;      //是否启用鉴权模式：0 不启用， 1 启用
+
+    uint32_t multi_mode;    //内部参数
+    uint32_t phy_mode;      //射频工作模式
+    /*
+        phy_mode&amp;0xff =&gt; 射频工作模式
+        #define PHY_MODE_1MBPS      1
+        #define PHY_MODE_125KBPS    4
+    */
+
+    /*
+        射频管脚使用
+        switch((phy_mode &gt;&gt; 16) &amp; 0xff) {
+            case 0:
+                __tx_pin = 20;
+                __rx_pin = 19;
+                break;
+
+            case 1:
+                __tx_pin = NRF_GPIO_PIN_MAP(1, 4);
+                __rx_pin = NRF_GPIO_PIN_MAP(1, 2);
+                break;
+
+            default:
+                __tx_pin = 20;
+                __rx_pin = 19;
+                break;
+        }
+    */
+};
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>API详解</li>
+</ol>
+<div class="code c highlight-default notranslate"><div class="highlight"><pre><span></span>/*
+    节点模块基础硬件初始化函数
+*/
+uint32_t __svc(0) case_low_init(void);
+
+/*
+    节点模块初始化函数， 必须再调用case_low_init()之后方可调用
+*/
+uint32_t __svc(1) case_init(void);
+
+/*
+    节点模块事件读取函数，应用层已经封装好，不建议用户直接使用
+*/
+uint32_t __svc(2) case_evt_read(uint8_t *data);
+
+/*
+    节点模块发送函数
+    Profile: 需要发送的数据类型
+    data: 需要发送的数据，单个数据长度最大18个字节
+    len：需要发送数据的长度， 最大18
+    ack：需要发送的数据使用需要网关应答， 0 不需要，1 需要
+*/
+uint32_t __svc(3) case_write(uint32_t profile, uint8_t *data, uint8_t len, uint8_t ack);
+
+
+/*
+    节点模块高速数据读取函数
+    // 5A Len 00 00 xx xx xx xx
+*/
+uint32_t __svc(4) case_evt_hs_read(uint8_t *data, uint32_t id);
+/*
+    该函数暂未使用
+*/
+uint32_t __svc(5) case_evt_hs_ack(uint8_t *data, uint8_t length, uint8_t ack);
+
+/*
+    节点模块高速数据发送缓存区注册函数
+
+    fifo：struct fifo{
+            volatile unsigned int in;
+            volatile unsigned int out;
+            unsigned         int mask;
+            unsigned char *data;
+        };
+
+    fifo大小： 256*N, N&gt;=3
+*/
+uint32_t __svc(6) case_evt_hs_ack_fifo_register(void *fifo);
+
+/*
+    节点模块高速晶振自动函数，
+    on：0 高速晶振有协议栈自动控制，1 高速晶振始终工作
+*/
+uint32_t __svc(7) case_clock_request(uint32_t on);
+
+/*
+    节点模块配置读取函数
+*/
+uint32_t __svc(8) case_config_read(void *config);
+
+/*
+    节点模块配置更新函数
+*/
+uint32_t __svc(9) case_config_update(void *config);
+
+/*
+    节点模块RSSI读取函数
+*/
+uint32_t __svc(10) case_rssi_read(void);
+
+/*
+    节点模块协议栈版本读取函数
+*/
+uint32_t __svc(11) case_version_read(uint8_t *version, uint32_t length);
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>初始化</li>
+</ol>
+<div class="code c highlight-default notranslate"><div class="highlight"><pre><span></span>int main(void)
+{
+
+    /*
+        节点模块的协议栈使用硬件列表：
+        1. NRF_RADIO
+        2. NRF_RTC0
+        3. NRF_ECB
+
+        用户使用协议栈时不得使用以上硬件
+    */
+    //节点模块基础硬件初始化
+    case_low_init();
+    //节点模块配置读取
+    case_config_read(&amp;case_info);
+
+    //nRF52840 Normal
+    //case_info.phy_mode = 0x00010001;
+
+    //nRF52810 Normal
+    //case_info.phy_mode = 0x00000001;
+    //nRF52840 Long
+    case_info.phy_mode = 0x00010004;
+    //case_info.panid = 0xffff;
+    //节点模块配置更新
+    case_config_update(&amp;case_info);
+    //节点模块初始化
+    case_init();
+    //节点Profile初始化
+    node_profile_init();
+
+    while(1) {
+        case_process();
+        node_profile_process();
+    }
+
+}
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>开发模板</li>
+</ol>
+<div class="code c highlight-default notranslate"><div class="highlight"><pre><span></span>/*
+*/
+#include &quot;node_app.h&quot;
+#include &quot;node_auth.h&quot;
+#include &quot;node_uart.h&quot;
+//#include &quot;user_led.h&quot;
+
+//节点模块收到消息后，LPWDS协议栈会调用该函数， 用户需在这里处理接收到的消息
+void node_app_on_cmd_handler(uint32_t profile, uint8_t *data, uint32_t length)
+{
+    node_auth_cmd_process(profile, data, length);
+    node_uart_on_cmd_handler(profile, data, length);
+    //user_led_cmd_process(profile, data, length);
+}
+
+//节点模块的beacon周期调用函数， 只有在节点联网的状态下，该函数才会被调用
+void node_app_tick_process(void)
+{
+    node_uart_tick_process();
+}
+
+void node_app_process(void)
+{
+    node_uart_process();
+}
+
+//用户的初始化建议放在这里
+void node_app_init(void)
+{
+    node_auth_init();
+    node_uart_init();
+    //user_led_init();
+}
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="base-module.html" class="btn btn-neutral float-right" title="基站模块" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to LPWDS’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Larry.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

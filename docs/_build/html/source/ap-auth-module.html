@@ -1,0 +1,283 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>鉴权 &mdash; LPWDS 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="高速传输" href="ap-hs-module.html" />
+    <link rel="prev" title="接入点模块" href="ap-module.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> LPWDS
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="node-module.html">节点模块</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base-module.html">基站模块</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base-data-module.html">数据收发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ap-module.html">接入点模块</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">鉴权</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">1. 简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">2. 配置鉴权级别</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">3. 添加节点模块的鉴权信息</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ap-hs-module.html">高速传输</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">LPWDS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>鉴权</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/source/ap-auth-module.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>鉴权<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="id2">
+<h2>1. 简介<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>LPWDS的鉴权是LPWDS服务器程序配合基站模块、接入点模块和节点模块共同实现的。</p>
+<dl class="docutils">
+<dt>实现过程：</dt>
+<dd><ol class="first last arabic simple">
+<li>将节点的鉴权信息按照LPWDS的要求加入REDIS数据库中。</li>
+<li>节点模块会发送请求信息向接入点模块请求网络信息。</li>
+<li>接入点模块收到来自节点模块的请求信息后会通过LPWDS服务程序去REDIS数据中查询是否有该节点模块的鉴权信息。</li>
+<li>如果有该节点模块的鉴权信息，接入点会将其配置的网络信息（要连接的基站模块的PANID和KEY）发送给该节点模块。</li>
+</ol>
+</dd>
+</dl>
+</div>
+<div class="section" id="id3">
+<h2>2. 配置鉴权级别<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>将LPWDS的鉴权设置成白名单模式</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">hset</span> <span class="n">auth_info</span> <span class="n">level</span> <span class="nb">list</span>
+<span class="p">(</span><span class="n">integer</span><span class="p">)</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>3. 添加节点模块的鉴权信息<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>节点模块的鉴权信息由：节点部分信息+网络部分信息 组成。</dt>
+<dd><ol class="first last arabic simple">
+<li>节点部分信息：节点模块KEY2(16) + 节点模块IV2(16) + 节点模块TOKEN(8)</li>
+<li>网络部分信息：基站模块PANID(2) + 基站模块MAC地址(6) + 基站模块KEY(16)</li>
+</ol>
+</dd>
+<dt>节点模块的鉴权方式有4种：</dt>
+<dd><ol class="first last arabic simple">
+<li>指定基站模块连接：auth:base;</li>
+<li>指定网络连接：auth:net;</li>
+<li>指定基站模块连接带基站KEY下发：auth:base_key;</li>
+<li>指定网络连接带基站KEY下发：auth:net_key;</li>
+</ol>
+</dd>
+</dl>
+<p>实例1 - 添加节点模块58116E675E5C， 指定网络连接 (使用指定网络连接时基站模块MAC地址会被节点忽略不使用)</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">hset</span> <span class="n">auth_list</span> <span class="mf">58116E675</span><span class="n">E5C</span> <span class="n">auth</span><span class="p">:</span><span class="n">net</span><span class="p">;</span><span class="n">node</span><span class="p">:</span><span class="mi">000102030405060708090</span><span class="n">A0B0C0D0E0F000102030405060708090A0B0C0D0E0F12345678</span><span class="p">;</span><span class="n">base</span><span class="p">:</span><span class="mf">12363E7845</span><span class="n">A5F7A2</span>
+<span class="p">(</span><span class="n">integer</span><span class="p">)</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>实例2 - 添加节点模块58116E675E5C， 指定网络连接带基站KEY下发 (使用指定网络连接带基站KEY下发时基站模块MAC地址会被节点忽略不使用)</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">hset</span> <span class="n">auth_list</span> <span class="mf">58116E675</span><span class="n">E5C</span> <span class="n">auth</span><span class="p">:</span><span class="n">net_key</span><span class="p">;</span><span class="n">node</span><span class="p">:</span><span class="mi">000102030405060708090</span><span class="n">A0B0C0D0E0F000102030405060708090A0B0C0D0E0F12345678</span><span class="p">;</span><span class="n">base</span><span class="p">:</span><span class="mf">12363E7845</span><span class="n">A5F7A2000102030405060708090A0B0C0D0E0F</span>
+<span class="p">(</span><span class="n">integer</span><span class="p">)</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>实例3 - 添加节点模块58116E675E5C， 指定基站模块连接 (使用指定网络连接时节点模块会连接到指定的基站模块上面)</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">hset</span> <span class="n">auth_list</span> <span class="mf">58116E675</span><span class="n">E5C</span> <span class="n">auth</span><span class="p">:</span><span class="n">base</span><span class="p">;</span><span class="n">node</span><span class="p">:</span><span class="mi">000102030405060708090</span><span class="n">A0B0C0D0E0F000102030405060708090A0B0C0D0E0F12345678</span><span class="p">;</span><span class="n">base</span><span class="p">:</span><span class="mf">12363E7845</span><span class="n">A5F7A2</span>
+<span class="p">(</span><span class="n">integer</span><span class="p">)</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>实例4 - 添加节点模块58116E675E5C， 指定网络连接带基站KEY下发 (使用指定网络连接带基站KEY下发时节点模块会连接到指定的基站模块上面)</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">hset</span> <span class="n">auth_list</span> <span class="mf">58116E675</span><span class="n">E5C</span> <span class="n">auth</span><span class="p">:</span><span class="n">base_key</span><span class="p">;</span><span class="n">node</span><span class="p">:</span><span class="mi">000102030405060708090</span><span class="n">A0B0C0D0E0F000102030405060708090A0B0C0D0E0F12345678</span><span class="p">;</span><span class="n">base</span><span class="p">:</span><span class="mf">12363E7845</span><span class="n">A5F7A2000102030405060708090A0B0C0D0E0F</span>
+<span class="p">(</span><span class="n">integer</span><span class="p">)</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="ap-hs-module.html" class="btn btn-neutral float-right" title="高速传输" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="ap-module.html" class="btn btn-neutral float-left" title="接入点模块" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Larry.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
