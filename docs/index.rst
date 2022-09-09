@@ -16,6 +16,7 @@ Welcome to LPWDS's documentation!
    source/ap-module
    source/ap-auth-module
    source/ap-hs-module
+   source/loc-module
 
 Indices and tables
 ==================
